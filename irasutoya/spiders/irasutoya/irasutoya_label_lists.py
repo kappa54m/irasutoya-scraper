@@ -32,9 +32,9 @@ class IrasutoyaLabelListsSpider(scrapy.Spider):
         return reqs
 
     def parse(self, response):
+        doc = BeautifulSoup(response.body.decode('utf-8'), 'html.parser')
         self.logger.debug("'%s' page %d", response.meta.get('label'),
                           response.meta.get('page'))
-        doc = BeautifulSoup(response.body.decode('utf-8'), 'html.parser')
         contents = doc.select("#post")
         self.logger.info("#content=%d", len(contents))
         for ic, c in enumerate(contents):

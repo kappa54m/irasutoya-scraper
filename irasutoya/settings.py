@@ -91,3 +91,6 @@ AUTOTHROTTLE_ENABLED = True
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+# Irasutoya
+IRASUTOYA_IRASUTOS_SAVE_DIR = "./out/irasutoya/irasutos/"

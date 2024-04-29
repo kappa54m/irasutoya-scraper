@@ -2,6 +2,8 @@
 - Python 3.10
 - scrapy (2.11.1)
 - beautifulsoup4 (4.12.3)
+- pillow (10.3.0)
+- python-dotenv (1.0.1)
 
 # Run
 

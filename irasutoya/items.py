@@ -30,3 +30,7 @@ class DictWrapperItem(Item):
 
 class IrasutoyaIrasutoListItem(DictWrapperItem):
     pass
+
+
+class IrasutoyaIrasutoItem(DictWrapperItem):
+    pass
