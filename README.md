@@ -4,6 +4,8 @@
 - beautifulsoup4 (4.12.3)
 - pillow (10.3.0)
 - python-dotenv (1.0.1)
+- SQLAlchemy (2.0.29)
+- psycopg2 (2.9.9)
 
 # Run
 
@@ -22,3 +24,12 @@ scrapy crawl irasutoya__label_lists \
 ```
 TODO dump results to an actual database
 
+### 3. irasutos
+```sh
+#!/bin/sh
+export DB_CONNECTION_STRING="sqlite:///out/irasutoya/irasutos.sqlite"
+scrapy crawl irasutoya__irasutos \
+    -a irasuto_lists_csv=out/irasutoya/label_lists_categories.csv \
+    -s USE_DB=1
+```
+Can also modify `IRASUTOYA_IRASUTOS_SAVE_DIR` in `settings` to change the locations wherein images are saved.

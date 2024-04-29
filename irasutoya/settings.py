@@ -62,9 +62,9 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "irasutoya.pipelines.IrasutoyaPipeline": 300,
-#}
+ITEM_PIPELINES = {
+    "irasutoya.pipelines.IrasutoyaPipeline": 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
@@ -91,6 +91,9 @@ AUTOTHROTTLE_ENABLED = True
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+# Global settings
+USE_DB = False
 
 # Irasutoya
 IRASUTOYA_IRASUTOS_SAVE_DIR = "./out/irasutoya/irasutos/"

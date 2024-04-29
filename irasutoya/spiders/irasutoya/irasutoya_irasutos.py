@@ -1,5 +1,4 @@
 from irasutoya.items import IrasutoyaIrasutoItem
-from utils import list_to_csv
 
 import scrapy
 from bs4 import BeautifulSoup
@@ -44,11 +43,10 @@ class IrasutoyaIrasutosSpider(scrapy.Spider):
 
     def parse(self, response):
         doc = BeautifulSoup(response.body.decode('utf-8'), 'html.parser')
-        self.logger.info("Downloading [{}/{}] '{}'".format(
-            response.meta.get('dl_index', -2) + 1, len(self.irasuto_brief_infos), response.meta.get('title', "???")))
-
-        def list_to_csv_fun(l):
-            return list_to_csv(l, quotechar='|', quoting=csv.QUOTE_MINIMAL, delimiter=';')
+        self.logger.info("Downloading [{}/{} ({:.01f}%)] '{}'".format(
+            response.meta.get('dl_index', -2) + 1, len(self.irasuto_brief_infos),
+            100 * (response.meta.get('dl_index', -2) + 1) / (len(self.irasuto_brief_infos)),
+            response.meta.get('title', "???")))
 
         d = {
             'page_url': response.meta['page_url'],
@@ -65,14 +63,15 @@ class IrasutoyaIrasutosSpider(scrapy.Spider):
         for im_e in doc.select("#main #Blog1 #post > .entry a img"):
             img_urls.append(im_e.parent['href'])
         d['image_urls'] = img_urls
-        d['entry_raw'] = str(doc.select("#main #Blog1 #post > .entry"))
+        entry_es = doc.select("#main #Blog1 #post > .entry")
+        assert len(entry_es) == 1
+        d['entry_raw'] = str(entry_es[0])
         sep_es = doc.select("#main #Blog1 #post > .entry > p > .separator")
         d['description'] = sep_es[-1].text if len(sep_es) > 0 else None
 
         d['tags'] = []
         for tag_e in main_cont.select(".titlemeta .category [rel=tag]"):
             d['tags'].append(tag_e.text)
-        d['tags'] = list_to_csv_fun(d['tags'])
 
         upload_date_str = getattr(main_cont.select_one(".entry-post-date"), 'text', '').strip()
         prefix = "公開日："
