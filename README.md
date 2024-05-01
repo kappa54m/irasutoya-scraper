@@ -33,3 +33,10 @@ scrapy crawl irasutoya__irasutos \
     -s USE_DB=1
 ```
 Can also modify `IRASUTOYA_IRASUTOS_SAVE_DIR` in `settings` to change the locations wherein images are saved.
+
+### 4. category details
+Collect additional information in regards to categories of irasutos. Scrape hierarchical category information.
+```sh
+scrapy crawl irasutoya__category_details -a json_save_path=out/irasutoya/category_details.json
+```
+
